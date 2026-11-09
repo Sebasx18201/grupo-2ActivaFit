@@ -1,0 +1,2 @@
+﻿modelo_ganador_seleccionado_solo_con_cv,balanced_accuracy,recall_abandono,precision_abandono,f1_abandono,n_test,interpretacion
+Árbol de decisión,1.00000000,1.00000000,1.00000000,1.00000000,2989,Clasificación retrospectiva; disponibilidad temporal no comprobada

@@ -1,0 +1,60 @@
+LIMITACIÓN DE DISPONIBILIDAD TEMPORAL — ACTivaFit / Dropout
+
+Etiqueta aplicada a todos los resultados: clasificación retrospectiva; disponibilidad temporal no comprobada.
+El CSV no define el instante en que se emitiría la predicción, una fecha de corte ni la ventana de cálculo de sus variables.
+Por eso no es posible demostrar qué campos estarían disponibles antes del abandono. No se excluyeron variables salvo Id y Dropout.
+
+Variables que requieren validación explícita con el proceso de negocio:
+- EnrollmentStart
+- EnrollmentFinish
+- EnrollmentDuration
+- EnrollmentDurationClass1
+- EnrollmentDurationClass2
+- LastPeriodStart
+- LastPeriodFinish
+- DateLastVisit
+- DaysWithoutFrequency
+- DaysWithoutFrequencyClass1
+- DaysWithoutFrequencyClass2
+- LifetimeValue
+- LifetimeValueClass1
+- AverageFrequency
+- AverageFrequencyClass1
+- AverageFrequencyClass2
+- UseByTime
+- AthleticsActivities
+- WaterActivities
+- FitnessActivities
+- DanceActivities
+- TeamActivities
+- RacketActivities
+- CombatActivities
+- NatureActivities
+- SpecialActivities
+- OtherActivities
+- NumberOfActivities
+- NumberOfFrequencies
+- NumberOfFrequenciesClass1
+- AttendedClasses
+- AttendedClassesClass1
+- AttendedClassesAverage
+- AttendedClassesAverageClass1
+- AllowedWeeklyVisitsBySLA
+- AllowedNumberOfVisitsBySLA
+- RealNumberOfVisits
+- Ratio
+- RatioClass2
+- NumberOfRenewals
+- HasReferences
+- NumberOfReferences
+
+Revisión prioritaria: EnrollmentFinish, LastPeriodFinish, DateLastVisit, DaysWithoutFrequency, EnrollmentDuration,
+LifetimeValue, AverageFrequency, variables de asistencia y visitas, NumberOfRenewals, actividades acumuladas y referencias.
+Pueden ser valores calculados al cierre del período, depender de inactividad posterior o resumir un lapso que incluye el abandono.
+EnrollmentStart y fechas de visitas/periodos pueden ser anteriores al resultado, pero sin fecha de corte tampoco se confirma su disponibilidad.
+
+No presentar estas métricas como alerta temprana. Para ello, definir una fecha de corte operacional, reconstruir cada predictor usando
+solo información disponible hasta esa fecha y validar respetando el orden temporal (y, si corresponde, separando socios).
+El parseo de las cinco fechas a marcas numéricas es determinista y no aprende del test; esas columnas siguen incluidas como predictores.
+
+La partición aleatoria estratificada puede compartir periodos o socios entre train y test si el CSV tiene filas relacionadas; el CSV no permite verificarlo.
